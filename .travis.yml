@@ -1,0 +1,10 @@
+jobs:
+  include:
+    - stage: "Unit Test"
+      script: npm run unit
+    
+    - stage: "Lint"
+      script: npm run lint
+    
+    - stage: "Build"
+      script: npm run build
