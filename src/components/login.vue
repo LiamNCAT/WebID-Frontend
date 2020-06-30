@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1></h1>
+        <h1>{{msg}}</h1>
     </div>
 </template>
 
@@ -10,6 +10,11 @@
 
 <script>
 export default {
-  name: 'Login'
+  name: 'Login',
+  data(){
+      return {
+          msg: "Welcome to Joe's Social Media Site"
+      }
+  }
 }
 </script>
