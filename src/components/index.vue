@@ -1,8 +1,8 @@
 <template>
     <div id="welcome">
       <h1>{{msg}}</h1>
-      <a href="/login">Login</a>
-      <a href="/reg">Registration</a>
+      <router-link to="/login">Login</router-link>
+      <router-link to="/reg"> Registration</router-link>
     </div>
 </template>
 

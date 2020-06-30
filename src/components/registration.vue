@@ -13,7 +13,6 @@
 </style>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'Register',
   data () {
@@ -25,7 +24,6 @@ export default {
     }
   },
   computed: {
-    
   }
 }
 </script>
