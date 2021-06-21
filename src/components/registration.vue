@@ -17,7 +17,7 @@
           <label for="uri">URL:</label>
           <input id="uri" v-model="uri"><br />
         </fieldset>
-        <button>Register</button>
+        <button @click="registerPerson()">Register</button>
     </div>
 </template>
 
@@ -30,6 +30,7 @@
 </style>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Register',
   data () {
@@ -40,7 +41,27 @@ export default {
       email: ''
     }
   },
-  computed: {
+  methods: {
+    registerPerson () {
+      axios.post('/cert', this.uri)
+        .then(function (response) {
+          const blob = new Blob([response.data], { type: 'application/x-x509-ca-cert' })
+          const link = document.createElement('a')
+          link.href = URL.createObjectURL(blob)
+          link.download = 'label'
+          link.click()
+          URL.revokeObjectURL(link.href)
+        })
+      axios.post('/register', { 'firstName': this.firstName, 'lastName': this.lastName, 'email': this.email, 'uri': this.uri })
+        .then(function (response) {
+          const blob = new Blob([response.data], { type: 'text/n3' })
+          const link = document.createElement('a')
+          link.href = URL.createObjectURL(blob)
+          link.download = 'label'
+          link.click()
+          URL.revokeObjectURL(link.href)
+        })
+    }
   }
 }
 </script>
