@@ -10,7 +10,7 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "unit:prod": "jest --config test/unit/jest.conf.js --coverage && coveralls < coverage/lcov.info",
     "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit",
+    "lint": "eslint --ext .js,.vue src test/unit --fix",
     "build": "node build/build.js"
   },
   "dependencies": {
