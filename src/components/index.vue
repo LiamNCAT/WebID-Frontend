@@ -3,7 +3,7 @@
       <b-navbar class="nav" type="dark" variant="dark" fixed="top">
         <b-navbar-brand href="#"><img class="logo" src="../assets/ncat.png">WebID Demo</b-navbar-brand>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item to="/login">Login</b-nav-item>
+          <b-nav-item to="/login" @click="login">Login</b-nav-item>
           <b-nav-item to="/reg"> Registration</b-nav-item>
         </b-navbar-nav>
       </b-navbar>
@@ -12,11 +12,26 @@
 </template>
 
 <script>
+import axios from 'axios'
+import https from 'https'
 export default {
   name: 'Index',
   data () {
     return {
       msg: 'Welcome to the WebID demo'
+    }
+  },
+  methods:{
+    login(e){
+      const httpsAgent = new https.Agent({
+        cert: fs.readFileSync('client.crt'),
+        key: fs.readFileSync('client.key'),
+        ca: fs.readFileSync('ca.crt'),
+      });
+      axios.post('/login',{httpsAgent})
+      .then(function(response){
+
+      });
     }
   }
 }
