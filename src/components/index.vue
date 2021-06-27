@@ -14,6 +14,7 @@
 <script>
 import axios from 'axios'
 import https from 'https'
+import fs from 'fs'
 export default {
   name: 'Index',
   data () {
@@ -21,17 +22,16 @@ export default {
       msg: 'Welcome to the WebID demo'
     }
   },
-  methods:{
-    login(e){
+  methods: {
+    login (e) {
       const httpsAgent = new https.Agent({
-        cert: fs.readFileSync('client.crt'),
-        key: fs.readFileSync('client.key'),
-        ca: fs.readFileSync('ca.crt'),
-      });
-      axios.post('/login',{httpsAgent})
-      .then(function(response){
+        cert: fs.readFileSync('./usercert.pem'),
+        key: fs.readFileSync('./key.pem')
+      })
+      axios.post('/login', {httpsAgent})
+        .then(function (response) {
 
-      });
+        })
     }
   }
 }
