@@ -8,5 +8,7 @@ describe('registration.vue', () => {
   it('Register should give rdf', () => {
     const Constructor = Vue.extend(Register)
     const vm = new Constructor().$mount()
+    axios.post.mockResolvedValue()
+    
   })
 })
