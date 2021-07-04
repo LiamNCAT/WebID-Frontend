@@ -62,6 +62,7 @@ export default {
           link.download = 'label'
           link.click()
           URL.revokeObjectURL(link.href)
+          
         })
     }
   }
