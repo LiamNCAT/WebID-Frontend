@@ -1,10 +1,27 @@
+os: linux
+language: node_js
+branches:
+  only:
+  - master
 jobs:
   include:
     - stage: "Unit Test"
-      script: npm run unit
+      script: npm run unit:prod
     
     - stage: "Lint"
       script: npm run lint
     
-    - stage: "Build"
-      script: npm run build
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "LiamNCAT"
+  - git config --local user.email "wmnick@aggies.ncat.edu"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
+  - npm run build
+  
+deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file: "FILE TO UPLOAD"
+  skip_cleanup: true
+  draft: true
