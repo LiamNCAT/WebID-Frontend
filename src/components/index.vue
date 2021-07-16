@@ -1,7 +1,7 @@
 <template>
     <div>
       <b-navbar class="nav" type="dark" variant="dark" fixed="top">
-        <b-navbar-brand href="#"><img class="logo" src="../assets/ncat.png">WebID Demo</b-navbar-brand>
+        <b-navbar-brand href="#">WebID Demo</b-navbar-brand>
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="/login" @click="login">Login</b-nav-item>
           <b-nav-item to="/reg"> Registration</b-nav-item>
@@ -28,7 +28,7 @@ export default {
         cert: fs.readFileSync('./usercert.pem'),
         key: fs.readFileSync('./key.pem')
       })
-      axios.post('/login', {httpsAgent})
+      axios.post('/login', { httpsAgent })
         .then(function (response) {
 
         })
@@ -37,10 +37,5 @@ export default {
 }
 </script>
 
- <style scoped>
-    .logo {
-      float:left;
-      width: 75px;
-      height: 40px
-    }
+ <style>
  </style>

@@ -1,7 +1,7 @@
 <template>
     <div>
       <b-navbar type="dark" variant="dark" fixed="top">
-        <b-navbar-brand href="#"><img class="logo" src="../assets/ncat.png">WebID Demo</b-navbar-brand>
+        <b-navbar-brand href="#">WebID Demo</b-navbar-brand>
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="/login">Login</b-nav-item>
           <b-nav-item to="/reg"> Registration</b-nav-item>
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     registerPerson () {
-      axios.post('/register', { 'firstName': this.firstName, 'lastName': this.lastName, 'email': this.email, 'uri': this.uri })
+      axios.post('/register', { firstName: this.firstName, lastName: this.lastName, email: this.email, uri: this.uri })
         .then(function (response) {
           const blob = new Blob([response.data], { type: 'text/n3' })
           const link = document.createElement('a')
@@ -62,7 +62,6 @@ export default {
           link.download = 'label'
           link.click()
           URL.revokeObjectURL(link.href)
-          
         })
     }
   }
