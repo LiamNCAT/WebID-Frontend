@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     registerPerson () {
+      var rsponse = true
       axios.post('/register', { firstName: this.firstName, lastName: this.lastName, email: this.email, uri: this.uri })
         .then(function (response) {
           const blob = new Blob([response.data], { type: 'text/n3' })
@@ -51,9 +52,14 @@ export default {
           link.download = 'label'
           link.click()
           URL.revokeObjectURL(link.href)
+          rsponse = true
+        }).catch(() => {
+          rsponse = false
         })
+      return rsponse
     },
     createCert () {
+      var rsponse = true
       axios.post('/cert', this.uri)
         .then(function (response) {
           const blob = new Blob([response.data], { type: 'application/x-x509-ca-cert' })
@@ -62,7 +68,11 @@ export default {
           link.download = 'label'
           link.click()
           URL.revokeObjectURL(link.href)
+          rsponse = true
+        }).catch(() => {
+          rsponse = false
         })
+      return rsponse
     }
   }
 }

@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit --coverage",
+    "coveralls": "vue-cli-service test:unit --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "lint": "vue-cli-service lint --fix"
   },
   "dependencies": {
@@ -14,6 +15,7 @@
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "rdflib": "^2.2.7",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "lint-staged": "^9.5.0",
+    "node-forge": "^0.10.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

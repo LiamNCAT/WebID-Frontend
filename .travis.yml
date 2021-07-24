@@ -1,28 +1,34 @@
 os: linux
 language: node_js
+node_js: 14
 branches:
   only:
   - master
+cache:
+  directories:
+  - node_modules
+install: npm install
 jobs:
   include:
     - stage: "Unit Test"
-      script: npm run unit:prod
+      script: npm run coveralls
     
     - stage: "Lint"
       script: npm run lint
     
-before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "LiamNCAT"
-  - git config --local user.email "wmnick@aggies.ncat.edu"
-  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-  - git tag $TRAVIS_TAG
-  - npm run build
-  - tar -zcvf build.tar.gz dist
-  
-deploy:
-  provider: releases
-  api_key: $TOKEN
-  file: build.tar.gz
-  skip_cleanup: true
-  draft: true
+    - stage: "Deploy to Github Releases"
+      script: skip
+      before_deploy:
+         # Set up git user name and tag this commit
+        - git config --local user.name "LiamNCAT"
+        - git config --local user.email "wmnick@aggies.ncat.edu"
+        - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+        - git tag $TRAVIS_TAG
+        - npm run build
+        - tar -zcvf build.tar.gz dist
+      deploy:
+       provider: releases
+       api_key: $TOKEN
+       file: build.tar.gz
+       skip_cleanup: true
+       draft: true

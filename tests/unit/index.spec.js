@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Index from '@/components/index'
+import Index from '@/components/index.vue'
 
 describe('index.vue', () => {
   it('Should render the welcome correctly', () => {
