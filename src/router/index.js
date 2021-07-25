@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import index from '../components/index.vue'
-import register from '../components/registration.vue'
-import login from '../components/login.vue'
+import Index from '../components/index.vue'
+import Register from '../components/registration.vue'
+import Login from '../components/login.vue'
+import Biometrics from '../components/biometrics.vue'
+
 
 Vue.use(VueRouter)
 
@@ -10,17 +12,22 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    component: index
+    component: Index
   },
   {
     path: '/reg',
     name: 'register',
-    component: register
+    component: Register
   },
   {
     path: '/login',
     name: 'login',
-    component: login
+    component: Login
+  },
+  {
+    path: '/bio',
+    name: 'biometrics',
+    component: Biometrics
   }
 ]
 
