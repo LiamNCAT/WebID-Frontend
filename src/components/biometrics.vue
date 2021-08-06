@@ -36,6 +36,7 @@ export default {
       this.greyscale(faceData)
       this.vueCanvasContext.clearRect(0, 0, this.vueCanvas.width, this.vueCanvas.height)
       this.vueCanvasContext.putImageData(faceData, 0, 0)
+      // eslint-disable-next-line
       var img = this.imgToBitmap(faceData)
     },
     greyscale (imageDat) {
