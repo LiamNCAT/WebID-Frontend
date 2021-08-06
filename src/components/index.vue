@@ -14,7 +14,6 @@
 <script>
 import axios from 'axios'
 import https from 'https'
-import fs from 'fs'
 export default {
   name: 'Index',
   data () {
@@ -25,8 +24,7 @@ export default {
   methods: {
     login (e) {
       const httpsAgent = new https.Agent({
-        cert: fs.readFileSync('./usercert.pem'),
-        key: fs.readFileSync('./key.pem')
+        rejectUnauthorized: false
       })
       axios.post('/login', { httpsAgent })
         .then(function (response) {

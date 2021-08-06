@@ -16,6 +16,7 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "rdflib": "^2.2.7",
+    "js-objectdetect": "git://github.com/Identity-Framework/js-objectdetect.git#classifiermodules",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
