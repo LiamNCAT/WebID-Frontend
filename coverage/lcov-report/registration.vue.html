@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/24</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/24</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -133,9 +133,7 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -180,36 +178,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -254,41 +250,39 @@ export default {
       firstName: '',
       lastName: '',
       uri: '',
-      email: ''
+      email: '',
+      isRegistered: null,
+      certCreated: null
     }
   },
   methods: {
-    registerPerson () {
-      var rsponse = true
+     registerPerson () {
       axios.post('/register', { firstName: this.firstName, lastName: this.lastName, email: this.email, uri: this.uri })
-        .then(function (response) {
-          const blob = new Blob([response.data], { type: 'text/n3' })
-          const link = document.createElement('a')
-          link.href = URL.createObjectURL(blob)
-<span class="cstat-no" title="statement not covered" >          link.download = 'label'</span>
-<span class="cstat-no" title="statement not covered" >          link.click()</span>
-<span class="cstat-no" title="statement not covered" >          URL.revokeObjectURL(link.href)</span>
-<span class="cstat-no" title="statement not covered" >          rsponse= true</span>
-        }).catch(()=&gt;{
-          rsponse = false
-        })
-        return rsponse
+      .then(function(response){
+        const blob = new Blob([response.data], { type: 'text/n3' })
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(blob)
+        link.download = 'label'
+        link.click()
+        URL.revokeObjectURL(link.href)
+        this.isRegistered = true
+      }).catch(function(){
+        this.isRegistered = false
+      })
     },
     createCert () {
-      var rsponse = true
       axios.post('/cert', this.uri)
         .then(function (response) {
           const blob = new Blob([response.data], { type: 'application/x-x509-ca-cert' })
           const link = document.createElement('a')
           link.href = URL.createObjectURL(blob)
-<span class="cstat-no" title="statement not covered" >          link.download = 'label'</span>
-<span class="cstat-no" title="statement not covered" >          link.click()</span>
-<span class="cstat-no" title="statement not covered" >          URL.revokeObjectURL(link.href)</span>
-<span class="cstat-no" title="statement not covered" >          rsponse = true</span>
-        }).catch(()=&gt;{
-          rsponse = false;
+          link.download = 'label'
+          link.click()
+          URL.revokeObjectURL(link.href)
+          this.createCert = true
+        }).catch(() =&gt; {
+          this.createCert = false
         })
-        return rsponse
     }
   }
 }
@@ -300,7 +294,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Jul 24 2021 00:03:29 GMT-0400 (Eastern Daylight Time)
+                at Sun Aug 08 2021 00:19:35 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="prettify.js"></script>

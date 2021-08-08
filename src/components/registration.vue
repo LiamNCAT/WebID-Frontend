@@ -38,28 +38,27 @@ export default {
       firstName: '',
       lastName: '',
       uri: '',
-      email: ''
+      email: '',
+      isRegistered: null,
+      certCreated: null
     }
   },
   methods: {
-    registerPerson () {
-      var rsponse = true
+     registerPerson () {
       axios.post('/register', { firstName: this.firstName, lastName: this.lastName, email: this.email, uri: this.uri })
-        .then(function (response) {
-          const blob = new Blob([response.data], { type: 'text/n3' })
-          const link = document.createElement('a')
-          link.href = URL.createObjectURL(blob)
-          link.download = 'label'
-          link.click()
-          URL.revokeObjectURL(link.href)
-          rsponse = true
-        }).catch(() => {
-          rsponse = false
-        })
-      return rsponse
+      .then(function(response){
+        const blob = new Blob([response.data], { type: 'text/n3' })
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(blob)
+        link.download = 'label'
+        link.click()
+        URL.revokeObjectURL(link.href)
+        this.isRegistered = true
+      }).catch(function(){
+        this.isRegistered = false
+      })
     },
     createCert () {
-      var rsponse = true
       axios.post('/cert', this.uri)
         .then(function (response) {
           const blob = new Blob([response.data], { type: 'application/x-x509-ca-cert' })
@@ -68,11 +67,10 @@ export default {
           link.download = 'label'
           link.click()
           URL.revokeObjectURL(link.href)
-          rsponse = true
+          this.createCert = true
         }).catch(() => {
-          rsponse = false
+          this.createCert = false
         })
-      return rsponse
     }
   }
 }
