@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { shallowMount } from '@vue/test-utils'
 import Register from '@/components/registration'
 import axios from 'axios'
 import forge from 'node-forge'
@@ -8,9 +8,11 @@ const $rdf = require('rdflib')
 jest.mock('axios')
 
 describe('registration.vue', () => {
+  global.URL.createObjectURL = jest.fn();
+  global.URL.revokeObjectURL = jest.fn();
   it('Register should give rdf true', () => {
-    const Constructor = Vue.extend(Register)
-    const vm = new Constructor().$mount()
+
+    const wrapper = shallowMount(Register)
 
     var RDF = new $rdf.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#')
     var FOAF = new $rdf.Namespace('http://xmlns.com/foaf/0.1/')
@@ -20,18 +22,19 @@ describe('registration.vue', () => {
 
     store.add(me, FOAF('name'), 'Albert Bloggs')
     store.add(me, RDF('type'), FOAF('Person'))
+    
+    const resp = {data: store.toString()}
+    axios.post.mockImplementation(() => Promise.resolve(resp))
 
-    axios.post.mockResolvedValue(store.toString())
-
-    const spy = jest.spyOn(vm, 'registerPerson')
-    const person = vm.registerPerson()
-
-    expect(spy).toHaveBeenCalled()
-    expect(person).toBeTruthy()
+    wrapper.vm.registerPerson()
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.isRegistered).toBeTruthy()
+    })
   })
+
   it('Register should give cert', () => {
-    const Constructor = Vue.extend(Register)
-    const vm = new Constructor().$mount()
+    
+    const wrapper = shallowMount(Register)
 
     var pki = forge.pki
 
@@ -112,12 +115,13 @@ describe('registration.vue', () => {
 
     cert.sign(keys.privateKey)
 
-    axios.post.mockResolvedValue(cert)
+    axios.mockImplementation(() => Promise.resolve({data:cert}))
+    
 
-    const spy = jest.spyOn(vm, 'createCert')
-    const certAvail = vm.createCert()
+    wrapper.vm.createCert()
 
-    expect(spy).toHaveBeenCalled()
-    expect(certAvail).toBeTruthy()
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.certCreated).toBeTruthy()
+    })
   })
 })
