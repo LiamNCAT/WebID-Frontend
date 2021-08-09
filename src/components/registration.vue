@@ -17,7 +17,7 @@
           <label for="uri">URL:</label>
           <input id="uri" v-model="uri"><br />
         </fieldset>
-        <button @click="registerPerson()">Register</button>
+        <button @click="register()">Register</button>
     </div>
 </template>
 
@@ -44,22 +44,33 @@ export default {
     }
   },
   methods: {
-     registerPerson () {
-      axios.post('/register', { firstName: this.firstName, lastName: this.lastName, email: this.email, uri: this.uri })
-      .then(function(response){
-        const blob = new Blob([response.data], { type: 'text/n3' })
-        const link = document.createElement('a')
-        link.href = URL.createObjectURL(blob)
-        link.download = 'label'
-        link.click()
-        URL.revokeObjectURL(link.href)
-        this.isRegistered = true
-      }).catch(function(){
-        this.isRegistered = false
-      })
+    register () {
+      this.registerPerson()
+      if (this.isRegistered) {
+        this.createCert()
+      } else {
+        return false
+      }
+
+      if (this.certCreated) { return true }
+      return false
+    },
+    registerPerson () {
+      axios.post('/api/register', { firstName: this.firstName, lastName: this.lastName, email: this.email, uri: this.uri })
+        .then(function (response) {
+          const blob = new Blob([response.data], { type: 'text/n3' })
+          const link = document.createElement('a')
+          link.href = URL.createObjectURL(blob)
+          link.download = 'label'
+          link.click()
+          URL.revokeObjectURL(link.href)
+          this.isRegistered = true
+        }).catch(function () {
+          this.isRegistered = false
+        })
     },
     createCert () {
-      axios.post('/cert', this.uri)
+      axios.post('/api/cert', this.uri)
         .then(function (response) {
           const blob = new Blob([response.data], { type: 'application/x-x509-ca-cert' })
           const link = document.createElement('a')

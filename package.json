@@ -34,6 +34,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
+    "jest-canvas-mock": "^2.3.1",
     "lint-staged": "^9.5.0",
     "node-forge": "^0.10.0",
     "vue-template-compiler": "^2.6.11"
@@ -69,6 +70,9 @@
     "not dead"
   ],
   "jest": {
-    "preset": "@vue/cli-plugin-unit-jest"
+    "preset": "@vue/cli-plugin-unit-jest",
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
   }
 }

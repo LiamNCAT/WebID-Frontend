@@ -6,10 +6,10 @@ import axios from 'axios'
 jest.mock('axios')
 
 describe('index.vue', () => {
-  it('Login event works correctly',()=>{
+  it('Login event works correctly', () => {
     const wrapper = shallowMount(Index)
 
-    const resp = {data: true}
+    const resp = { data: true }
     axios.post.mockImplementation(() => Promise.resolve(resp))
 
     const spy = jest.spyOn(wrapper.vm, 'login')
@@ -19,14 +19,13 @@ describe('index.vue', () => {
     })
   })
 
-  it('Should return true if WebID is valid', ()=>{
+  it('Should return true if WebID is valid', () => {
     const Constructor = Vue.extend(Index)
     const vm = new Constructor().$mount()
-    const resp = {data: true}
+    const resp = { data: true }
 
     axios.post.mockImplementation(() => Promise.resolve(resp))
     const login = vm.login()
     expect(login).toBeTruthy()
   })
-
 })

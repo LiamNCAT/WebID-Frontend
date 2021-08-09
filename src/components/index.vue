@@ -25,9 +25,10 @@ export default {
   methods: {
     async login () {
       const httpsAgent = new https.Agent({
-        rejectUnauthorized: false
+        rejectUnauthorized: false,
+        requestCert: true
       })
-      var response = await axios.post('/login', { httpsAgent })
+      var response = await axios.post('/api/login', { httpsAgent })
       return response.data
     }
   }
