@@ -8,10 +8,9 @@ const $rdf = require('rdflib')
 jest.mock('axios')
 
 describe('registration.vue', () => {
-  global.URL.createObjectURL = jest.fn();
-  global.URL.revokeObjectURL = jest.fn();
+  global.URL.createObjectURL = jest.fn()
+  global.URL.revokeObjectURL = jest.fn()
   it('Register should give rdf true', () => {
-
     const wrapper = shallowMount(Register)
 
     var RDF = new $rdf.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#')
@@ -22,8 +21,8 @@ describe('registration.vue', () => {
 
     store.add(me, FOAF('name'), 'Albert Bloggs')
     store.add(me, RDF('type'), FOAF('Person'))
-    
-    const resp = {data: store.toString()}
+
+    const resp = { data: store.toString() }
     axios.post.mockImplementation(() => Promise.resolve(resp))
 
     wrapper.vm.registerPerson()
@@ -33,7 +32,6 @@ describe('registration.vue', () => {
   })
 
   it('Register should give cert', () => {
-    
     const wrapper = shallowMount(Register)
 
     var pki = forge.pki
@@ -115,8 +113,7 @@ describe('registration.vue', () => {
 
     cert.sign(keys.privateKey)
 
-    axios.mockImplementation(() => Promise.resolve({data:cert}))
-    
+    axios.mockImplementation(() => Promise.resolve({ data: cert }))
 
     wrapper.vm.createCert()
 
