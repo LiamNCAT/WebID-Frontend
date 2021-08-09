@@ -17,7 +17,7 @@
           <label for="uri">URL:</label>
           <input id="uri" v-model="uri"><br />
         </fieldset>
-        <button @click="registerPerson()">Register</button>
+        <button @click="register()">Register</button>
     </div>
 </template>
 
@@ -44,6 +44,17 @@ export default {
     }
   },
   methods: {
+    register () {
+      this.registerPerson()
+      if (this.isRegistered) {
+        this.createCert()
+      } else {
+        return false
+      }
+
+      if (this.certCreated) { return true }
+      return false
+    },
     registerPerson () {
       axios.post('/api/register', { firstName: this.firstName, lastName: this.lastName, email: this.email, uri: this.uri })
         .then(function (response) {
