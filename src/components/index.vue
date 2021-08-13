@@ -3,7 +3,7 @@
       <b-navbar class="nav" type="dark" variant="dark" fixed="top">
         <b-navbar-brand href="#">WebID Demo</b-navbar-brand>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item to="/login" @click="login">Login</b-nav-item>
+          <b-nav-item id="login" to="/login" @click="login">Login</b-nav-item>
           <b-nav-item to="/reg"> Registration</b-nav-item>
         </b-navbar-nav>
       </b-navbar>
@@ -14,7 +14,6 @@
 <script>
 import axios from 'axios'
 import https from 'https'
-import fs from 'fs'
 export default {
   name: 'Index',
   data () {
@@ -23,15 +22,13 @@ export default {
     }
   },
   methods: {
-    login (e) {
+    async login () {
       const httpsAgent = new https.Agent({
-        cert: fs.readFileSync('./usercert.pem'),
-        key: fs.readFileSync('./key.pem')
+        rejectUnauthorized: false,
+        requestCert: true
       })
-      axios.post('/login', { httpsAgent })
-        .then(function (response) {
-
-        })
+      var response = await axios.post('/api/login', { httpsAgent })
+      return response.data
     }
   }
 }

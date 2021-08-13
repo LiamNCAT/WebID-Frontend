@@ -17,7 +17,8 @@
           <label for="uri">URL:</label>
           <input id="uri" v-model="uri"><br />
         </fieldset>
-        <button @click="registerPerson()">Register</button>
+        <button @click="register()">Register</button>
+
     </div>
 </template>
 
@@ -38,12 +39,25 @@ export default {
       firstName: '',
       lastName: '',
       uri: '',
-      email: ''
+      email: '',
+      isRegistered: null,
+      certCreated: null
     }
   },
   methods: {
+    register () {
+      this.registerPerson()
+      if (this.isRegistered) {
+        this.createCert()
+      } else {
+        return false
+      }
+
+      if (this.certCreated) { return true }
+      return false
+    },
     registerPerson () {
-      axios.post('/register', { firstName: this.firstName, lastName: this.lastName, email: this.email, uri: this.uri })
+      axios.post('/api/register', { firstName: this.firstName, lastName: this.lastName, email: this.email, uri: this.uri })
         .then(function (response) {
           const blob = new Blob([response.data], { type: 'text/n3' })
           const link = document.createElement('a')
@@ -51,10 +65,13 @@ export default {
           link.download = 'label'
           link.click()
           URL.revokeObjectURL(link.href)
+          this.isRegistered = true
+        }).catch(function () {
+          this.isRegistered = false
         })
     },
     createCert () {
-      axios.post('/cert', this.uri)
+      axios.post('/api/cert', this.uri)
         .then(function (response) {
           const blob = new Blob([response.data], { type: 'application/x-x509-ca-cert' })
           const link = document.createElement('a')
@@ -62,6 +79,9 @@ export default {
           link.download = 'label'
           link.click()
           URL.revokeObjectURL(link.href)
+          this.createCert = true
+        }).catch(() => {
+          this.createCert = false
         })
     }
   }
