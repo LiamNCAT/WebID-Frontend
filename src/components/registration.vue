@@ -18,6 +18,7 @@
           <input id="uri" v-model="uri"><br />
         </fieldset>
         <button @click="register()">Register</button>
+
     </div>
 </template>
 

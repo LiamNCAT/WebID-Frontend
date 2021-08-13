@@ -4,7 +4,6 @@ import axios from 'axios'
 import forge from 'node-forge'
 
 const $rdf = require('rdflib')
-
 jest.mock('axios')
 
 describe('registration.vue', () => {

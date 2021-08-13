@@ -5,6 +5,7 @@ import Register from '../components/registration.vue'
 import Login from '../components/login.vue'
 import Biometrics from '../components/biometrics.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [

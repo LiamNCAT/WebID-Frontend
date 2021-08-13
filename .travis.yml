@@ -15,7 +15,7 @@ jobs:
     
     - stage: "Lint"
       script: npm run lint
-    
+      
     - stage: "Deploy to Github Releases"
       script: skip
       before_deploy:
