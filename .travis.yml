@@ -31,4 +31,4 @@ jobs:
        api_key: $TOKEN
        file: build.tar.gz
        skip_cleanup: true
-       draft: true
+       draft: false
