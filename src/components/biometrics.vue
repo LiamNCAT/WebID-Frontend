@@ -54,7 +54,7 @@ export default {
       // eslint-disable-next-line
       var query = "PREFIX fe:  <http://esterline.ncat.edu/dfe/> \n"+
         "PREFIX biom: <http://esterline.ncat.edu/identity/biometric#> \n"+
-        "SELECT ?posX ?posY ?height ?width ?xCoord ?yCoord\n"+
+        "SELECT ?height ?width ?xCoord ?yCoord\n"+
         "WHERE {\n"+
         "  ?f a feterms:DisposableFE . \n" +
         "  ?f feterms:appliedTo biom:FacialBiometric  . \n"+
@@ -73,8 +73,20 @@ export default {
       var eq = $rdf.SPARQLToQuery(query,false,kb)
       var results = store.querySync(eq)
 
+      var width = results['?width']
+      var height = results['?height']
 
+      var xCoord = results['?xCoord']
+      var yCoord = results['?yCoord']
 
+      var i = 0 
+      while(i != xCoord.length ){
+        for(var x = (xCoord[i]+(width/2)); x<(xCoord[i]-(width/2)); x++){
+          for(var y = (yCoord[i]-(height/2)); y<(yCoord[i]+(height/2)); y++){
+
+          }
+        }
+      }
     },
     calculatePixelIntensity (imageDat) {
       var dataArray = imageDat.data

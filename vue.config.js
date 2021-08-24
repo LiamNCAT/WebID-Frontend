@@ -16,6 +16,11 @@ module.exports = {
         target: 'http://localhost:8080/api/cert',
         ws: true,
         changeOrigin: true
+      },
+      '/api/bio':{
+        target: 'http://localhost:8080/api/bio',
+        ws: true,
+        changeOrigin: true
       }
     }
   }
