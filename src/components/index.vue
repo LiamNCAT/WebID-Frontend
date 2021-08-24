@@ -5,6 +5,7 @@
         <b-navbar-nav class="ml-auto">
           <b-nav-item id="login" to="/login" @click="login">Login</b-nav-item>
           <b-nav-item to="/reg"> Registration</b-nav-item>
+          <b-nav-item to="/bio">Biometrics</b-nav-item>
         </b-navbar-nav>
       </b-navbar>
       <h1 class="welcome">{{msg}}</h1>

@@ -1,102 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1628563824343" clover="3.2.0">
-  <project timestamp="1628563824343" name="All files">
-    <metrics statements="87" coveredstatements="30" conditionals="12" coveredconditionals="0" methods="20" coveredmethods="11" elements="119" coveredelements="41" complexity="0" loc="87" ncloc="87" packages="1" files="3" classes="3"/>
+<coverage generated="1629694899184" clover="3.2.0">
+  <project timestamp="1629694899184" name="All files">
+    <metrics statements="36" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="5" elements="45" coveredelements="18" complexity="0" loc="36" ncloc="36" packages="1" files="2" classes="2"/>
     <file name="biometrics.vue" path="C:\Users\Bianca\OneDrive\Documents\WebID\WebID-Frontend\src\components\biometrics.vue">
-      <metrics statements="55" coveredstatements="4" conditionals="8" coveredconditionals="0" methods="10" coveredmethods="2"/>
+      <metrics statements="30" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="3"/>
       <line num="12" count="1" type="stmt"/>
-      <line num="17" count="1" type="stmt"/>
-      <line num="23" count="0" type="stmt"/>
-      <line num="24" count="0" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="25" count="0" type="stmt"/>
       <line num="26" count="0" type="stmt"/>
-      <line num="27" count="0" type="stmt"/>
+      <line num="28" count="0" type="stmt"/>
       <line num="29" count="0" type="stmt"/>
-      <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="30" count="0" type="stmt"/>
+      <line num="32" count="0" type="stmt"/>
       <line num="33" count="0" type="stmt"/>
+      <line num="35" count="0" type="stmt"/>
       <line num="36" count="0" type="stmt"/>
-      <line num="37" count="0" type="stmt"/>
-      <line num="38" count="0" type="stmt"/>
       <line num="40" count="0" type="stmt"/>
+      <line num="42" count="0" type="stmt"/>
       <line num="43" count="0" type="stmt"/>
-      <line num="44" count="0" type="stmt"/>
       <line num="45" count="0" type="stmt"/>
-      <line num="46" count="0" type="stmt"/>
-      <line num="47" count="0" type="stmt"/>
       <line num="48" count="0" type="stmt"/>
-      <line num="50" count="0" type="stmt"/>
       <line num="52" count="0" type="stmt"/>
       <line num="53" count="0" type="stmt"/>
       <line num="54" count="0" type="stmt"/>
       <line num="55" count="0" type="stmt"/>
-      <line num="59" count="0" type="stmt"/>
-      <line num="60" count="0" type="stmt"/>
-      <line num="61" count="0" type="stmt"/>
-      <line num="62" count="0" type="stmt"/>
-      <line num="63" count="0" type="stmt"/>
-      <line num="65" count="0" type="stmt"/>
-      <line num="71" count="0" type="stmt"/>
-      <line num="73" count="0" type="stmt"/>
-      <line num="74" count="0" type="stmt"/>
-      <line num="78" count="1" type="stmt"/>
-      <line num="79" count="1" type="stmt"/>
-      <line num="80" count="0" type="stmt"/>
-      <line num="81" count="0" type="stmt"/>
-      <line num="83" count="0" type="stmt"/>
-      <line num="84" count="0" type="stmt"/>
-      <line num="85" count="0" type="stmt"/>
-      <line num="86" count="0" type="stmt"/>
-      <line num="89" count="0" type="stmt"/>
-      <line num="90" count="0" type="stmt"/>
-      <line num="92" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="93" count="0" type="stmt"/>
-      <line num="94" count="0" type="stmt"/>
-      <line num="95" count="0" type="stmt"/>
-      <line num="97" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="98" count="0" type="stmt"/>
-      <line num="99" count="0" type="stmt"/>
-      <line num="100" count="0" type="stmt"/>
-      <line num="102" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="103" count="0" type="stmt"/>
-      <line num="104" count="0" type="stmt"/>
-      <line num="105" count="0" type="stmt"/>
-    </file>
-    <file name="index.vue" path="C:\Users\Bianca\OneDrive\Documents\WebID\WebID-Frontend\src\components\index.vue">
-      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <line num="15" count="1" type="stmt"/>
-      <line num="16" count="1" type="stmt"/>
-      <line num="21" count="2" type="stmt"/>
-      <line num="27" count="2" type="stmt"/>
-      <line num="31" count="2" type="stmt"/>
-      <line num="32" count="2" type="stmt"/>
-    </file>
-    <file name="registration.vue" path="C:\Users\Bianca\OneDrive\Documents\WebID\WebID-Frontend\src\components\registration.vue">
-      <metrics statements="26" coveredstatements="20" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="7"/>
-      <line num="33" count="1" type="stmt"/>
-      <line num="37" count="2" type="stmt"/>
-      <line num="48" count="0" type="stmt"/>
-      <line num="49" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="50" count="0" type="stmt"/>
-      <line num="52" count="0" type="stmt"/>
-      <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
       <line num="56" count="0" type="stmt"/>
-      <line num="59" count="1" type="stmt"/>
-      <line num="61" count="1" type="stmt"/>
-      <line num="62" count="1" type="stmt"/>
-      <line num="63" count="1" type="stmt"/>
-      <line num="64" count="1" type="stmt"/>
+      <line num="57" count="0" type="stmt"/>
+      <line num="58" count="0" type="stmt"/>
+      <line num="59" count="0" type="stmt"/>
+      <line num="61" count="0" type="stmt"/>
       <line num="65" count="1" type="stmt"/>
       <line num="66" count="1" type="stmt"/>
       <line num="67" count="1" type="stmt"/>
-      <line num="69" count="1" type="stmt"/>
-      <line num="73" count="1" type="stmt"/>
-      <line num="75" count="1" type="stmt"/>
-      <line num="76" count="1" type="stmt"/>
-      <line num="77" count="1" type="stmt"/>
-      <line num="78" count="1" type="stmt"/>
-      <line num="79" count="1" type="stmt"/>
-      <line num="80" count="1" type="stmt"/>
-      <line num="81" count="1" type="stmt"/>
-      <line num="83" count="1" type="stmt"/>
+      <line num="68" count="1" type="stmt"/>
+    </file>
+    <file name="index.vue" path="C:\Users\Bianca\OneDrive\Documents\WebID\WebID-Frontend\src\components\index.vue">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="22" count="2" type="stmt"/>
+      <line num="28" count="2" type="stmt"/>
+      <line num="32" count="2" type="stmt"/>
+      <line num="33" count="2" type="stmt"/>
     </file>
   </project>
 </coverage>
