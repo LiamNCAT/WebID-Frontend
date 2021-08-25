@@ -9,15 +9,22 @@
 </template>
 
 <script>
-import * as od from 'js-objectdetect'
-const $rdf = require('rdflib')
-
-export default {
-  name: 'Biometrics',
+export default{
+  name: 'Enrollment',
   data () {
     return {
-      msg: 'Biometric login'
+      msg: 'Biometric enrollment'
     }
+  },
+  mounted(){
+    var video = document.getElementById('video')
+    var videoObj = { video: true }
+    this.vueCanvas = document.getElementById('canvas')
+    navigator.mediaDevices.getUserMedia(videoObj).then((stream) => {
+      video.srcObject = stream
+    })
+    this.vueVideo = video
+    this.vueCanvas.style.display = 'none'
   },
   methods: {
     captureBiometrics () {
@@ -43,49 +50,7 @@ export default {
       ctx.putImageData(faceData, 0, 0, this.vueCanvas.width, this.vueCanvas.height)
 
       faceData = ctx.getImageData()
-      return this.processBiometrics(faceData, id)
-    },
-    processBiometrics(faceData, id){
-    // eslint-disable-next-line
-      var img = this.calculatePixelIntensity(faceData)
-
-      const store = $rdf.graph()
-      const fetcher = new $rdf.Fetcher(store)
-      var query = "PREFIX fe:  <http://esterline.ncat.edu/dfe/> \n"+
-        "PREFIX biom: <http://esterline.ncat.edu/identity/biometric#> \n"+
-        "SELECT ?height ?width ?xCoord ?yCoord\n"+
-        "WHERE {\n"+
-        "  ?f a feterms:DisposableFE . \n" +
-        "  ?f feterms:appliedTo biom:FacialBiometric  . \n"+
-        "  ?f feterms:consistOf ?pc . \n"+
-        "  ?f feterms:height ?height . \n"+
-        "  ?f feterms:width ?width  . \n"+
-        "  ?f feterms:id  "+id+". \n"+
-        "  ?pc a feterms:PatchCollection . \n"+
-        "  ?pc feterms:hasPatch ?p . \n"+
-        "  ?p feterms:xCoord ?xCoord . \n"+
-        "  ?p feterms:yCoord ?yCoord ."
-        "}"
-
-      fetcher.nowOrWhenFetched('http://esterline.ncat.edu/dfe/', undefined, function(ok, body) {});
-
-      var eq = $rdf.SPARQLToQuery(query,false,kb)
-      var results = store.querySync(eq)
-
-      var width = results['?width']
-      var height = results['?height']
-
-      var xCoord = results['?xCoord']
-      var yCoord = results['?yCoord']
-
-      var i = 0 
-      while(i != xCoord.length ){
-        for(var x = (xCoord[i]+(width/2)); x<(xCoord[i]-(width/2)); x++){
-          for(var y = (yCoord[i]-(height/2)); y<(yCoord[i]+(height/2)); y++){
-
-          }
-        }
-      }
+      return this.enrollBiometrics(faceData)
     },
     calculatePixelIntensity (imageDat) {
       var dataArray = imageDat.data
@@ -116,20 +81,55 @@ export default {
       // eslint-disable-next-line
       var detector = new od.detector(canvas.width, canvas.height, 1.2, classifier)
       return detector.detect(canvas)
+    },
+    enrollBiometrics(faceData){
+      // eslint-disable-next-line
+      var img = this.calculatePixelIntensity(faceData)
+
+      const store = $rdf.graph()
+      const fetcher = new $rdf.Fetcher(store)
+
+      fetcher.nowOrWhenFetched('http://esterline.ncat.edu/dfe/', undefined, function(ok, body) {})
+
+      var query = "PREFIX fe:  <http://esterline.ncat.edu/dfe/> \n"+
+        "PREFIX biom: <http://esterline.ncat.edu/identity/biometric#> \n"+
+        "SELECT ?height ?width ?xCoord ?yCoord ?id\n"+
+        "WHERE {\n"+
+        "  ?f a feterms:DisposableFE . \n" +
+        "  ?f feterms:appliedTo biom:FacialBiometric  . \n"+
+        "  ?f feterms:consistOf ?pc . \n"+
+        "  ?f feterms:height ?height . \n"+
+        "  ?f feterms:width ?width  . \n"+
+        "  ?f feterms:id  ?id. \n"+
+        "  ?pc a feterms:PatchCollection . \n"+
+        "  ?pc feterms:hasPatch ?p . \n"+
+        "  ?p feterms:xCoord ?xCoord . \n"+
+        "  ?p feterms:yCoord ?yCoord ."
+        "}"
+
+      var eq = $rdf.SPARQLToQuery(query,false,kb)
+      var results = store.querySync(eq)
+
+      var width = results['?width']
+      var height = results['?height']
+
+      var xCoord = results['?xCoord']
+      var yCoord = results['?yCoord']
+      
+      var ids = results['?id']
+
+      var i = 0
+
+      while(i < ids.length){
+        for(var x = (xCoord[i]+(width/2)); x<(xCoord[i]-(width/2)); x++){
+          for(var y = (yCoord[i]-(height/2)); y<(yCoord[i]+(height/2)); y++){
+
+          }
+        }
+        i++
+      }
+      
     }
-  },
-  mounted () {
-    var video = document.getElementById('video')
-    var videoObj = { video: true }
-    this.vueCanvas = document.getElementById('canvas')
-    navigator.mediaDevices.getUserMedia(videoObj).then((stream) => {
-      video.srcObject = stream
-    })
-    this.vueVideo = video
-    this.vueCanvas.style.display = 'none'
   }
 }
 </script>
-
- <style>
- </style>
